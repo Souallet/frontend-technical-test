@@ -5,6 +5,7 @@ import Logo from "../assets/lbc-logo.webp";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import Card from "../components/card";
+import UserSelect from "../components/users/userSelect";
 
 const Home: FC = () => {
   const year = new Date().getFullYear();
@@ -27,6 +28,8 @@ const Home: FC = () => {
           height={125}
         />
         <h1 className={styles.title}>Welcome !</h1>
+        <p>Choose your User</p>
+        <UserSelect />
 
         <Card>
           <Link href="/conversations">Access to user conversations</Link>
