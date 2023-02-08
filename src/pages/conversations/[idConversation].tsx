@@ -9,6 +9,7 @@ import Main from "../../components/shared/main";
 import ConversationsHeader from "../../components/conversations/conversationsHeader";
 import MessagesList from "../../components/messages/messagesList";
 import MessagesForm from "../../components/messages/messagesForm";
+import Card from "../../components/card";
 
 import { useAppSelector } from "../../redux/hooks";
 import { User } from "../../types/user";
@@ -90,7 +91,9 @@ const Conversations: FC = () => {
 
       <Main>
         <StyledLinkContainer>
-          <Link href="/conversations">Access to user conversations</Link>
+          <Card>
+            <Link href="/conversations">Access to user conversations</Link>
+          </Card>
         </StyledLinkContainer>
         <ConversationsHeader conversation={conversation} />
         {isLoading ? <p>Loading...</p> : <MessagesList messages={messages} />}

@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import styled from "styled-components";
 
 import Container from "../components/container";
@@ -9,7 +10,7 @@ import ConversationsList from "../components/conversations/conversationsList";
 import { useAppSelector } from "../redux/hooks";
 import { User } from "../types/user";
 import { Conversation } from "../types/conversation";
-import Link from "next/link";
+import Card from "../components/card";
 
 const Conversations: FC = () => {
   const user: User = useAppSelector((state) => state.users.current);
@@ -36,9 +37,11 @@ const Conversations: FC = () => {
       </Head>
 
       <Main>
-        <StyledLink>
-          <Link href="/">Back to Home</Link>
-        </StyledLink>
+        <StyledLinkContainer>
+          <Card>
+            <Link href="/">Back to Home</Link>
+          </Card>
+        </StyledLinkContainer>
         <StyledTitle>Conversations List</StyledTitle>
 
         {isLoading ? (
@@ -56,10 +59,11 @@ const StyledTitle = styled.h1`
   padding-bottom: 3rem;
 `;
 
-const StyledLink = styled.div`
+const StyledLinkContainer = styled.div`
   text-align: center;
   padding-bottom: 1rem;
-  width: 100%;
+  margin: auto;
+  max-width: 350px;
 `;
 
 export default Conversations;

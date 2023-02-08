@@ -4,6 +4,7 @@ import Image from "next/image";
 import Logo from "../assets/lbc-logo.webp";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import Card from "../components/card";
 
 const Home: FC = () => {
   const year = new Date().getFullYear();
@@ -27,9 +28,9 @@ const Home: FC = () => {
         />
         <h1 className={styles.title}>Welcome !</h1>
 
-        <Link href="/conversations" className={styles.card}>
-          Access to user conversations
-        </Link>
+        <Card>
+          <Link href="/conversations">Access to user conversations</Link>
+        </Card>
       </main>
 
       <footer className={styles.footer}>&copy; leboncoin - {year}</footer>

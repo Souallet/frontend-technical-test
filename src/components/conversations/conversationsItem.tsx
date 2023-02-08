@@ -6,6 +6,7 @@ import styled from "styled-components";
 import moment from "moment";
 
 import { useAppSelector } from "../../redux/hooks";
+import Card from "../card";
 
 interface ConversationsItemProps {
   conversation: Conversation;
@@ -19,15 +20,17 @@ const ConversationsItem: FC<ConversationsItemProps> = ({ conversation }) => {
       : conversation.recipientNickname;
 
   return (
-    <StyledContainer>
-      <StyledPhoto>{otherUserNickname.charAt(0)}</StyledPhoto>
-      <StyledDetails>
-        <StyledUserData>{otherUserNickname}</StyledUserData>
-        <StyledLastMessage>
-          {moment(conversation.lastMessageTimestamp).format("MMM D")}
-        </StyledLastMessage>
-      </StyledDetails>
-    </StyledContainer>
+    <Card>
+      <StyledContainer>
+        <StyledPhoto>{otherUserNickname.charAt(0)}</StyledPhoto>
+        <StyledDetails>
+          <StyledUserData>{otherUserNickname}</StyledUserData>
+          <StyledLastMessage>
+            {moment(conversation.lastMessageTimestamp).format("MMM D")}
+          </StyledLastMessage>
+        </StyledDetails>
+      </StyledContainer>
+    </Card>
   );
 };
 
@@ -36,8 +39,6 @@ const StyledContainer = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 20px;
-  border: 1px solid black;
-  border-radius: 1.25rem;
   width: 350px;
   max-width: 350px;
   padding: 12px;
