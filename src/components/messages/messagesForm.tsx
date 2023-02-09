@@ -7,6 +7,7 @@ interface MessagesFormProps {
 }
 
 const MessagesForm: FC<MessagesFormProps> = ({ submitHandler }) => {
+  // Handle form submit
   const handleSubmit = async (event) => {
     event.preventDefault();
     const message = event.target.message.value;

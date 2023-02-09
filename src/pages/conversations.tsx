@@ -13,12 +13,18 @@ import { Conversation } from "../types/conversation";
 import Card from "../components/card";
 
 const Conversations: FC = () => {
+  // Get curent user in store
   const user: User = useAppSelector((state) => state.users.current);
+  // User conversations
   const [conversations, setConversations] = useState<Conversation[]>([]);
+  // Loading Status
   const [isLoading, setLoading] = useState<Boolean>(false);
 
   useEffect(() => {
+    // Change loading status
     setLoading(true);
+
+    // Fetch user conversations
     fetch(`${process.env.NEXT_PUBLIC_API_BASEURL}/conversations/${user.id}`, {
       cache: "no-store",
     })

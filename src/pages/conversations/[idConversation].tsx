@@ -15,45 +15,53 @@ import { useAppSelector } from "../../redux/hooks";
 import { User } from "../../types/user";
 
 const Conversations: FC = () => {
+  // Get curent user in store
   const user: User = useAppSelector((state) => state.users.current);
   const router = useRouter();
   const { idConversation } = router.query;
+  // Current Conversation
   const [conversation, setConversation] = useState();
+  // Conversation messages
   const [messages, setMessages] = useState([]);
+  // Loading status
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
 
-    // Fetch conversation
+    // Fetch user conversations
     fetch(`${process.env.NEXT_PUBLIC_API_BASEURL}/conversations/${user.id}`, {
       cache: "no-store",
     })
       .then((res) => res.json())
       .then((data) => {
+        // Fetch current conversation in fetched list
         const conv = data.find((d) => {
-          console.log(d);
           return d.id == idConversation;
         });
 
+        // Set current conversation
         setConversation(conv);
 
+        // Check if user is in conversation as recipient or sender
         if (user.id !== conv?.senderId && user.id !== conv?.recipientId) {
           return router.push("/conversations");
         }
       });
 
-    // Fetch message
+    // Fetch messages
     fetch(`${process.env.NEXT_PUBLIC_API_BASEURL}/messages/${idConversation}`, {
       cache: "no-store",
     })
       .then((res) => res.json())
       .then((data) => {
+        // Set messages
         setMessages(data);
         setLoading(false);
       });
   }, [router, idConversation, user.id]);
 
+  // Send new message in conversation
   const sendMessage = (message: String) => {
     const body = {
       body: message,
@@ -64,6 +72,7 @@ const Conversations: FC = () => {
 
     const bodyJSON = JSON.stringify(body);
 
+    // POST new message
     fetch(`${process.env.NEXT_PUBLIC_API_BASEURL}/messages/${idConversation}`, {
       method: "POST",
       headers: {
@@ -78,6 +87,7 @@ const Conversations: FC = () => {
         return res.json();
       })
       .then((data) => {
+        // Add message in current conversation
         setMessages([...messages, body]);
       });
   };

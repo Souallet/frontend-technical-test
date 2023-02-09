@@ -10,6 +10,7 @@ interface ConversationsHeaderProps {
 const ConversationsHeader: FC<ConversationsHeaderProps> = ({
   conversation,
 }) => {
+  // Date formatting
   const displayDate = (t) => {
     const date = moment(t);
     const isToday = date.isSame(new Date(), "day");

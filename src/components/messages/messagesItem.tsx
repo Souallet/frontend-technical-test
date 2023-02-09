@@ -10,10 +10,14 @@ interface MessagesItemProps {
 }
 
 const MessagesItem: FC<MessagesItemProps> = ({ message }) => {
+  // Get curent user in store
   const user: User = useAppSelector((state) => state.users.current);
+  // Author
   const [author, setAuthor] = useState<User>();
+  // Check if current user is message's author
   const userIsAuthor: Boolean = message.authorId === user.id;
 
+  // Fetch author informations
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASEURL}/users/${message.authorId}`, {
       cache: "no-store",

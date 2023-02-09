@@ -6,13 +6,17 @@ import styled from "styled-components";
 
 const UserSelect: FC = () => {
   const dispatch = useAppDispatch();
+  // Get curent user in store
   const user: User = useAppSelector((state) => state.users.current);
+  // Local users list
   const [users, setUsers] = useState<User[]>([]);
 
+  // Fetch user list
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASEURL}/users`)
       .then((res) => res.json())
       .then((data) => {
+        // set users
         setUsers(data);
       });
   }, []);

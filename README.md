@@ -37,7 +37,7 @@ Run API Server `npm run start-server`
 
 ## Build the app and run it up
 
-1. Create `.env..local`
+1. Create `.env.local`
 2. Add to it the `NEXT_PUBLIC_API_BASEURL=` and specify you API base URL
 3. Run Next dev server `npm run start`
 
